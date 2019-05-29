@@ -7,6 +7,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject PlayerBulletGO; // player's bullet prefab
     public GameObject BulletPosition1;
     public GameObject BulletPosition2;
+    public GameObject ExplosionGO; //explosion prefab
 
     public float speed;
 
@@ -69,4 +70,29 @@ public class PlayerControl : MonoBehaviour
         //update position of the player
         transform.position = pos;
     }
+
+
+    // Detect collision of the player ship with an enemy ship, or with an enemy bullet
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if ((col.tag == "EnemyShipTag") || (col.tag == "EnemyBulletTag"))
+        {
+            PlayExplosion();
+
+            //Destroy(gameObject); //Destroy the player's ship
+
+        }
+    }
+
+    //To instanciate an explosion
+    void PlayExplosion()
+    {
+        GameObject explosion = (GameObject)Instantiate(ExplosionGO);
+
+        //set the position of the explosion
+        explosion.transform.position = transform.position;
+    }
+
+
+
 }
