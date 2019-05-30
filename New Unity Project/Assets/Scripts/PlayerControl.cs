@@ -1,15 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    public GameObject GameManagerGO;
+
     public GameObject PlayerBulletGO; // player's bullet prefab
     public GameObject BulletPosition1;
     public GameObject BulletPosition2;
     public GameObject ExplosionGO; //explosion prefab
 
+    public Text LivesUIText;
+
+    const int MaxLives = 3;
+    int lives; //current player lives
+
     public float speed;
+
+    // on object initiation setup
+    public void Init()
+    {
+        lives = MaxLives;
+
+        //update the lives UI Text
+        LivesUIText.text = lives.ToString();
+
+        //Reset the player position to the center of the screen (when the user clicks on the play button)
+        transform.position = new Vector2(0, 0);
+
+        //set this player game object to active
+        gameObject.SetActive(true);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +46,9 @@ public class PlayerControl : MonoBehaviour
         // fire bullets when the spacebar is pressed
         if (Input.GetKeyDown("space"))
         {
+            //play the laser sound effect
+            GetComponent<AudioSource>().Play();
+
             //instanciation bullet 1
             GameObject bullet1 = (GameObject)Instantiate(PlayerBulletGO);
             bullet1.transform.position = BulletPosition1.transform.position; // set the bullet initial position
@@ -79,8 +105,14 @@ public class PlayerControl : MonoBehaviour
         {
             PlayExplosion();
 
-            //Destroy(gameObject); //Destroy the player's ship
+            lives--; //substract one live
+            LivesUIText.text = lives.ToString(); //update lives UI text
 
+            if (lives == 0)
+            {
+                GameManagerGO.GetComponent<GameManager>().SetGameManagerState(GameManager.GameManagerState.GameOver);
+                gameObject.SetActive(false);
+            }
         }
     }
 

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyControl : MonoBehaviour
 {
+    GameObject scoreUITextGO; // reference tot he text UI game object
+
     public GameObject ExplosionGO; //explosion prefab
 
     public float speed;
@@ -12,6 +14,9 @@ public class EnemyControl : MonoBehaviour
     void Start()
     {
         speed = 2f;
+
+        //Get the score text UI
+        scoreUITextGO = GameObject.FindGameObjectWithTag("ScoreTextTag");
     }
 
     // Update is called once per frame
@@ -43,6 +48,9 @@ public class EnemyControl : MonoBehaviour
         if ((col.tag == "PlayerShipTag") || (col.tag == "PlayerBulletTag"))
         {
             PlayExplosion();
+
+            //add 100 points to the score
+            scoreUITextGO.GetComponent<GameScore>().Score += 100;
 
             Destroy(gameObject); // Destroy this enemy ship
         }
