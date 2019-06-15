@@ -62,8 +62,13 @@
      <Compile Include="Assets\Scripts\EnemySpawner.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameScore.cs" />
+     <Compile Include="Assets\Scripts\Planet.cs" />
+     <Compile Include="Assets\Scripts\PlanetController.cs" />
      <Compile Include="Assets\Scripts\PlayerBullet.cs" />
      <Compile Include="Assets\Scripts\PlayerControl.cs" />
+     <Compile Include="Assets\Scripts\Star.cs" />
+     <Compile Include="Assets\Scripts\StarGenerator.cs" />
+     <Compile Include="Assets\Scripts\TimeCounter.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/User/Desktop/MA1/Q2/Application_mobile/Space_Shooter/New Unity Project/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>

@@ -66,7 +66,8 @@ public class EnemySpawner : MonoBehaviour
     //Function to start enemy spawner
     public void ScheduleEnemySpawner()
     {
-        //maxSpawnRateInSeconds = 5f;
+        //reset max spawn rate
+        maxSpawnRateInSeconds = 5f;
 
         Invoke("SpawnEnemy", maxSpawnRateInSeconds);  // an enemy appear après maxSpawnRateInSeconds
 

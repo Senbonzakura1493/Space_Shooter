@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject enemySpawner;
     public GameObject GameOverGO; //reference to the game over image
     public GameObject scoreUITextGO;
+    public GameObject TimeCounterGO;
+    public GameObject GameTitleGO;
 
     public enum GameManagerState
     {
@@ -35,9 +37,14 @@ public class GameManager : MonoBehaviour
                 //hide GameOver image
                 GameOverGO.SetActive(false);
 
+                //Display the game title
+                GameTitleGO.SetActive(true);
+
+                //Set play button
                 playButton.SetActive(true);
                 
                 break;
+
             case GameManagerState.Gameplay:
 
                 //reset the score
@@ -46,14 +53,24 @@ public class GameManager : MonoBehaviour
                 //hide play button on game play state
                 playButton.SetActive(false);
 
+                //hide the game title
+                GameTitleGO.SetActive(false);
+
                 //set the player visible (active) and init the player lives
                 playerShip.GetComponent<PlayerControl>().Init();
 
                 //start enemy spawner
                 enemySpawner.GetComponent<EnemySpawner>().ScheduleEnemySpawner();
 
+                //start the time counter
+                TimeCounterGO.GetComponent<TimeCounter>().StartTimeCounter();
+
                 break;
+
             case GameManagerState.GameOver:
+
+                //stop the time counter
+                TimeCounterGO.GetComponent<TimeCounter>().StopTimeCounter();
 
                 GameOverGO.SetActive(true);
 
