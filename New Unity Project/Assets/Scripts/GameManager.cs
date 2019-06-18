@@ -1,9 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Proyecto26;
+
 
 public class GameManager : MonoBehaviour
 {
+    public InputField textName;
+    public static string playerName;
+    
+    public GameObject PlayerName;
+
+
     public GameObject playButton;
     public GameObject playerShip;
     public GameObject enemySpawner;
@@ -34,6 +43,8 @@ public class GameManager : MonoBehaviour
         {
             case GameManagerState.Opening:
 
+                PlayerName.SetActive(true);
+
                 //hide GameOver image
                 GameOverGO.SetActive(false);
 
@@ -47,12 +58,14 @@ public class GameManager : MonoBehaviour
 
             case GameManagerState.Gameplay:
 
+                PlayerName.SetActive(false);
                 //reset the score
                 scoreUITextGO.GetComponent<GameScore>().Score = 0;
 
                 //hide play button on game play state
                 playButton.SetActive(false);
-
+                
+            
                 //hide the game title
                 GameTitleGO.SetActive(false);
 
@@ -69,6 +82,7 @@ public class GameManager : MonoBehaviour
 
             case GameManagerState.GameOver:
 
+                PostToDataBase();
                 //stop the time counter
                 TimeCounterGO.GetComponent<TimeCounter>().StopTimeCounter();
 
@@ -93,6 +107,7 @@ public class GameManager : MonoBehaviour
     //When the user click the play button
     public void StartGamePlay()
     {
+        playerName = textName.text;
         GMState = GameManagerState.Gameplay;
         UpdateGameManagerState();
     }
@@ -103,9 +118,11 @@ public class GameManager : MonoBehaviour
         SetGameManagerState(GameManagerState.Opening);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    private void PostToDataBase(){
+
+        User user = new User();
+        // using rest api to make application universal because SDK is only for mobile
+        RestClient.Post("https://fire-base-projec.firebaseio.com/.json",user);
 
     }
 }

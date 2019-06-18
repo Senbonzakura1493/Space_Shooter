@@ -7,17 +7,17 @@ public class GameScore : MonoBehaviour
 
     Text scoreTextUI;
 
-    int score;
+    public static int score;
 
     public int Score
     {
         get
         {
-            return this.score;
+            return score;
         }
         set
         {
-            this.score = value;
+            score = value;
             UpdateScoreTextUI();
         }
     }
