@@ -5,10 +5,9 @@
 Pay attention and try to catch the pipelines.
 Sometimes some exam's questions are known and you can save a heart and have one more chance to success.</br></p>
 
-
 # Development informations </br>
 <p>
-The application has been designed on Unity and connected to a database server on firebase to save the player name and the score.</p>
+The application has been designed on Unity and connected to a database server on firebase to save the player name and the score through an API Rest .</p>
 
 
 # Libraries </br>
