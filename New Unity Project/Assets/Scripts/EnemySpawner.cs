@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject EnemyGO; //Enemy prefab
+    public GameObject BookEnemy; //Enemy prefab
 
     float maxSpawnRateInSeconds = 5f;
 
@@ -30,7 +30,7 @@ public class EnemySpawner : MonoBehaviour
         Vector2 max = Camera.main.ViewportToWorldPoint(new Vector2(1, 1));
 
         //Instanciate an enemy
-        GameObject EnemyInstance = (GameObject)Instantiate(EnemyGO);
+        GameObject EnemyInstance = (GameObject)Instantiate(BookEnemy);
         EnemyInstance.transform.position = new Vector2(Random.Range(min.x, max.x), max.y);
 
         //Schedule to spawn next enemy

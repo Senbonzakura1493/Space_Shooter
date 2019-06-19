@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public GameObject scoreUITextGO;
     public GameObject TimeCounterGO;
     public GameObject GameTitleGO;
+    public GameObject PipelineSpawner;
 
     public enum GameManagerState
     {
@@ -75,6 +76,9 @@ public class GameManager : MonoBehaviour
                 //start enemy spawner
                 enemySpawner.GetComponent<EnemySpawner>().ScheduleEnemySpawner();
 
+                //start pipeline spawner
+                PipelineSpawner.GetComponent<PipelineSpawner>().SchedulePipelineSpawner();
+
                 //start the time counter
                 TimeCounterGO.GetComponent<TimeCounter>().StartTimeCounter();
 
@@ -90,6 +94,9 @@ public class GameManager : MonoBehaviour
 
                 //stop enemy spawner
                 enemySpawner.GetComponent<EnemySpawner>().UnscheduleEnemySpawner();
+
+                //stop pipeline spawner
+                PipelineSpawner.GetComponent<PipelineSpawner>().UnschedulePipelineSpawner();
 
                 //Change game manager state to Opening state after 8 sec
                 Invoke("ChangeToOpeningState", 8f);

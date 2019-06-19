@@ -12,6 +12,8 @@ public class PlayerControl : MonoBehaviour
     public GameObject BulletPosition2;
     public GameObject ExplosionGO; //explosion prefab
 
+    public GameObject LiveUp;
+
     public Text LivesUIText;
 
     const int MaxLives = 3;
@@ -114,6 +116,13 @@ public class PlayerControl : MonoBehaviour
                 gameObject.SetActive(false);
             }
         }
+
+        if ((col.tag == "PipelineTag"))
+        {
+            PlayMagicEffect();
+            lives ++;
+            LivesUIText.text = lives.ToString();
+        }
     }
 
     //To instanciate an explosion
@@ -123,6 +132,14 @@ public class PlayerControl : MonoBehaviour
 
         //set the position of the explosion
         explosion.transform.position = transform.position;
+    }
+
+    void PlayMagicEffect()
+    {
+        GameObject magicEffect = (GameObject)Instantiate(LiveUp);
+
+        //set the position of the explosion
+        magicEffect.transform.position = transform.position;
     }
 
 

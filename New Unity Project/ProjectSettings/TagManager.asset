@@ -9,6 +9,8 @@ TagManager:
   - PlayerBulletTag
   - EnemyBulletTag
   - ScoreTextTag
+  - LivesTextTag
+  - PipelineTag
   layers:
   - Default
   - TransparentFX
