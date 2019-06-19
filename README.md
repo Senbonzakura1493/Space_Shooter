@@ -9,6 +9,9 @@ Sometimes some exam's questions are known and you can save a heart and have one 
 <p>
 The application has been designed on Unity and connected to a database server on firebase to save the player name and the score through an API Rest .</p>
 
+# Use Case Diagram </br>
+
+![useCaseDiag](https://github.com/Senbonzakura1493/Space_Shooter/tree/master/diagrams/useCaseDiagram.png)
 
 # Libraries </br>
 <li> Collections.Generic;</br>
