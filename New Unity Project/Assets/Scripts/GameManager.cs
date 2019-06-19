@@ -123,6 +123,8 @@ public class GameManager : MonoBehaviour
         User user = new User();
         // using rest api to make application universal because SDK is only for mobile
         RestClient.Post("https://fire-base-projec.firebaseio.com/.json",user);
+        RestClient.Post("https://my-space-shooter.firebaseio.com/.json",user);
+        
 
     }
 }
