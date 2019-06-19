@@ -21,6 +21,8 @@ public class PlayerControl : MonoBehaviour
 
     public float speed;
 
+    float accelStartY; // to get the accelerometer y value at the star of the game
+
     // on object initiation setup
     public void Init()
     {
@@ -39,33 +41,41 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //get the initial accelerometer y value
+        accelStartY = Input.acceleration.y;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //*** */ no accelerometer mode
         // fire bullets when the spacebar is pressed
-        if (Input.GetKeyDown("space"))
-        {
-            //play the laser sound effect
-            GetComponent<AudioSource>().Play();
+        //if (Input.GetKeyDown("space"))
+        //{       
+        //}
 
-            //instanciation bullet 1
-            GameObject bullet1 = (GameObject)Instantiate(PlayerBulletGO);
-            bullet1.transform.position = BulletPosition1.transform.position; // set the bullet initial position
-
-            //instanciation bullet 2
-            GameObject bullet2 = (GameObject)Instantiate(PlayerBulletGO);
-            bullet2.transform.position = BulletPosition2.transform.position; // set the bullet initial position
-        }
-
-
-        float x = Input.GetAxisRaw("Horizontal");  // -1, 0, 1 --- left,no input,right
-        float y = Input.GetAxisRaw("Vertical"); // -1, 0, 1 --- down, no input, up
+        //**** */no accelerometer mode
+        //float x = Input.GetAxisRaw("Horizontal");  // -1, 0, 1 --- left,no input,right
+        //float y = Input.GetAxisRaw("Vertical"); // -1, 0, 1 --- down, no input, up
 
         // based on the input, we calculate a direction vector, and normalize it to have a unit vector
-        Vector2 direction = new Vector2(x, y).normalized;
+        //Vector2 direction = new Vector2(x, y).normalized;
+
+
+
+        //**** */accelerometer mode
+
+        //get the input from the accelerometer
+        float x = Input.acceleration.x;
+        float y = Input.acceleration.y - accelStartY ;
+
+        //create a vector with the accelerometer input values
+        Vector2 direction = new Vector2 (x,y);
+
+        //clamp the length of the vector to a maximum of 1...
+        if(direction.sqrMagnitude > 1)
+            direction.Normalize();
+
 
         //function that changes the player's position 
         Move(direction);
@@ -97,6 +107,21 @@ public class PlayerControl : MonoBehaviour
 
         //update position of the player
         transform.position = pos;
+    }
+
+    //function to make the player shoot
+    public void Shoot()
+    {
+        //play the laser sound effect
+        GetComponent<AudioSource>().Play();
+
+        //instanciation bullet 1
+        GameObject bullet1 = (GameObject)Instantiate(PlayerBulletGO);
+        bullet1.transform.position = BulletPosition1.transform.position; // set the bullet initial position
+
+        //instanciation bullet 2
+        GameObject bullet2 = (GameObject)Instantiate(PlayerBulletGO);
+        bullet2.transform.position = BulletPosition2.transform.position; // set the bullet initial position
     }
 
 
