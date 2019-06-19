@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using Proyecto26;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class GameManager : MonoBehaviour
 {
@@ -19,6 +22,7 @@ public class GameManager : MonoBehaviour
     public GameObject GameOverGO; //reference to the game over image
     public GameObject scoreUITextGO;
     public GameObject TimeCounterGO;
+
     public GameObject GameTitleGO;
     public GameObject PipelineSpawner;
     public GameObject ShootButton;
@@ -123,6 +127,12 @@ public class GameManager : MonoBehaviour
         playerName = textName.text;
         GMState = GameManagerState.Gameplay;
         UpdateGameManagerState();
+    }
+
+    //When the user click input field
+    public void DisplayKeyboard()
+    {
+        TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, false, false, true);
     }
 
     //Function to change Game manager state to opening state

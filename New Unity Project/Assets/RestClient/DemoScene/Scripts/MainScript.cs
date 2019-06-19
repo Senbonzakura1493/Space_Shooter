@@ -1,21 +1,25 @@
 ﻿using UnityEngine;
-using UnityEditor;
 using Models;
 using Proyecto26;
 using System.Collections.Generic;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 public class MainScript : MonoBehaviour {
 
     private readonly string basePath = "https://jsonplaceholder.typicode.com";
 	private RequestHelper currentRequest;
 
+#if UNITY_EDITOR
 	public void Get(){
 
 		// We can add default request headers for all requests
 		RestClient.DefaultRequestHeaders["Authorization"] = "Bearer ...";
 
         RequestHelper requestOptions = null;
-
+		
 		RestClient.GetArray<Post>(basePath + "/posts").Then(res => {
             EditorUtility.DisplayDialog ("Posts", JsonHelper.ArrayToJsonString<Post>(res, true), "Ok");
             return RestClient.GetArray<Todo>(basePath + "/todos");
@@ -43,6 +47,7 @@ public class MainScript : MonoBehaviour {
 
 		}).Catch(err => EditorUtility.DisplayDialog ("Error", err.Message, "Ok"));
 	}
+
 
 	public void Post(){
 
@@ -95,7 +100,7 @@ public class MainScript : MonoBehaviour {
 			}
 		});
 	}
-
+#endif
 	public void AbortRequest(){
 		if (currentRequest != null) {
 			currentRequest.Abort();

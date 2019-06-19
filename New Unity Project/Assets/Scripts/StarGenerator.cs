@@ -17,6 +17,7 @@ public class StarGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         //bottom left-point of the screen
         Vector2 min = Camera.main.ViewportToWorldPoint(new Vector2(0, 0));
 
