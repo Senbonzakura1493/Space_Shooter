@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public GameObject TimeCounterGO;
     public GameObject GameTitleGO;
     public GameObject PipelineSpawner;
+    public GameObject ShootButton;
 
     public enum GameManagerState
     {
@@ -65,10 +66,12 @@ public class GameManager : MonoBehaviour
 
                 //hide play button on game play state
                 playButton.SetActive(false);
-                
             
                 //hide the game title
                 GameTitleGO.SetActive(false);
+
+                //display the button shoot
+                ShootButton.SetActive(true);
 
                 //set the player visible (active) and init the player lives
                 playerShip.GetComponent<PlayerControl>().Init();
@@ -89,6 +92,9 @@ public class GameManager : MonoBehaviour
                 PostToDataBase();
                 //stop the time counter
                 TimeCounterGO.GetComponent<TimeCounter>().StopTimeCounter();
+
+                //hide button shoot
+                ShootButton.SetActive(false);
 
                 GameOverGO.SetActive(true);
 
