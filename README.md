@@ -11,7 +11,8 @@ The application has been designed on Unity and connected to a database server on
 
 # Use Case Diagram </br>
 
-![useCaseDiag](https://github.com/Senbonzakura1493/Space_Shooter/tree/master/diagrams/useCaseDiagram.png)
+![useCaseDiagram](https://github.com/Senbonzakura1493/Space_Shooter/tree/master/diagrams/useCaseDiagram.png)
+![sequenceDiagram](https://github.com/Senbonzakura1493/Space_Shooter/tree/master/diagrams/sequenceDiagram.png)
 
 # Libraries </br>
 <li> Collections.Generic;</br>
